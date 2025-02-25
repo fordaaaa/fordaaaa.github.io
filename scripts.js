@@ -1,29 +1,80 @@
+let keysCollected = 0;
+let timeElapsed = 0;
+
 document.addEventListener('DOMContentLoaded', function () {
-    enableArrowKeyLookControls();
+    setupKeyCollection();
+    setupPortalTeleport();
+    startTimer();
 });
 
-function enableArrowKeyLookControls() {
+//key obtination
+function setupKeyCollection() {
+    const keys = ['key1', 'key2', 'key3'];
+    const portal = document.querySelector('#portal');
+
+    keys.forEach((keyId) => {
+        const key = document.querySelector(`#${keyId}`);
+        if (!key) {
+            console.error(`Key ${keyId} not found!`);
+            return;
+        }
+
+        key.addEventListener('body-collision', (event) => {
+            const cameraRig = document.querySelector('#cameraRig');
+            if (event.detail.body.id === cameraRig.id) {
+                key.parentNode.removeChild(key);
+
+                keysCollected++;
+                console.log(`Keys collected: ${keysCollected}`);
+
+                if (keysCollected === 3) {
+                    unlockPortal(portal);
+                }
+            }
+        });
+    });
+}
+
+function unlockPortal(portal) {
+    portal.setAttribute('color', 'green'); //change portal colour to green when unlocked 
+    console.log('Portal unlocked!');
+}
+
+//portal stuff
+function setupPortalTeleport() {
+    const portal = document.querySelector('#portal');
     const cameraRig = document.querySelector('#cameraRig');
-    if (!cameraRig) {
-        console.error('Camera rig not found!');
+    const timerText = document.querySelector('#timer');
+    const gameOverText = document.querySelector('#gameOverText');
+
+    if (!portal || !cameraRig || !timerText || !gameOverText) {
+        console.error('Portal, camera rig, timer, or game over text not found!');
         return;
     }
 
-    let yaw = 0; 
-    let pitch = 0; 
+    portal.addEventListener('body-collision', (event) => {
+        if (event.detail.body.id === cameraRig.id && keysCollected === 3) {
 
-    document.addEventListener('keydown', (event) => {
-        const speed = 2; 
+            cameraRig.setAttribute('position', { x: 0, y: 1.6, z: 0 });
 
-        if (event.key === 'ArrowUp') {
-            pitch -= speed;
-        } else if (event.key === 'ArrowDown') {
-            pitch += speed;
-        } else if (event.key === 'ArrowLeft') {
-            yaw -= speed; 
-        } else if (event.key === 'ArrowRight') {
-            yaw += speed; 
+            //timer reset after winning
+            timeElapsed = 0;
+            timerText.setAttribute('value', `Time: ${timeElapsed}`);
+
+            //you won message
+            gameOverText.setAttribute('value', 'Game Over, You Won!');
+            gameOverText.setAttribute('visible', true);
+            console.log('Player teleported to start!');
         }
-        cameraRig.setAttribute('rotation', { x: pitch, y: yaw, z: 0 });
     });
+}
+
+//timer
+function startTimer() {
+    const timerText = document.querySelector('#timer');
+
+    setInterval(() => {
+        timeElapsed++;
+        timerText.setAttribute('value', `Time: ${timeElapsed}`);
+    }, 1000);
 }

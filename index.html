@@ -12,16 +12,24 @@
         <a-scene physics>
         <!-- simple objects -->
         <a-sky color="#ECECEC"></a-sky>
- 
-      
+        <a-box id="portal" position="0 1.6 -5" width="2" height="3" depth="0.1" color="blue" visible="true" static-body></a-box>
+       
         <!-- entities and models-->
         <!--<a-entity gltf-model="url(assets/red_button/scene.gltf)" position="-2 0 5" scale="0.5 0.5 0.5" static-body></a-entity>-->
         <a-entity gltf-model="url(assets/subwayinterior/scene.gltf)" position="10 1 15" scale="5 4 5" static-body></a-entity>
         
-        <a-entity id="cameraRig" position="10 1.6 15" static-body>
-            <a-entity camera look-controls wasd-controls="acceleration: 45" position="10 1 15"></a-entity>
+        <a-entity id="cameraRig" position="0 1.6 0" dynamic-body>
+            <a-entity camera look-controls wasd-controls="acceleration: 60" position="0 0 0"></a-entity>
+             
+        
+         <a-entity id="portal" position="10 1.6 20" rotation="0 0 0">
+                <a-cylinder id="portal-model"  radius="1"  height="3"  color="red"  static-body  visible="true"></a-cylinder>
         </a-entity>
-        <a-scene physics>
+
+
+        <!-- timer for escape room timer-->
+            <a-text id="timer" value="Time: 0" position="0 1.5 -2" scale="3 3 3" color="white"></a-text>
+            <a-text id="gameOverText" value="Game Over!" position="0 2 -3" scale="5 5 5" color="white" visible="false"></a-text>
     </a-scene>
     <script src="scripts.js"></script>
 </body>
