@@ -17,23 +17,7 @@
       
         <!-- entities and models-->
         <a-entity gltf-model="url(assets/red_button/scene.gltf)" position="-2 0 5" scale="0.5 0.5 0.5" static-body></a-entity>
-        <a-entity gltf-model="url(assets/interiorone/scene.gltf)" position="10 1 15" scale="0.1 0.1 0.1" static-body></a-entity>
-        
-        <!-- scripting features-->
-        <script>
-        
-        document.addEventListener('DOMContentLoaded', function () {
-                const cameraRig = document.querySelector('#cameraRig');
-                let isCrouching = false;
-        
-        document.addEventListener('keydown', function (event) {
-            if (event.key === 'c' || event.key === 'c' {
-                isCrouching = !isCrouching; 
-                        const newY = isCrouching ? 0.8 : 1.6; 
-                        cameraRig.setAttribute('position', { x: 0, y: newY, z: 0 });
-                
-            
-            
+        <a-entity gltf-model="url(assets/metrosubway/scene.gltf)" position="10 1 15" scale="0.1 0.1 0.1" static-body></a-entity>
     
     </a-scene>
 </body>
