@@ -1,20 +1,29 @@
 document.addEventListener('DOMContentLoaded', function () {
-    console.log('Scripts loaded successfully!');
-
-    disableCollisionForAllEntities();
+    enableArrowKeyLookControls();
 });
 
-function disableCollisionForAllEntities() {
-    const entities = document.querySelectorAll('[static-body], [dynamic-body]');
+function enableArrowKeyLookControls() {
+    const cameraRig = document.querySelector('#cameraRig');
+    if (!cameraRig) {
+        console.error('Camera rig not found!');
+        return;
+    }
 
-    entities.forEach(entity => {
-        if (entity.hasAttribute('static-body')) {
-            entity.removeAttribute('static-body');
-            console.log('Removed static-body from:', entity);
+    let yaw = 0; 
+    let pitch = 0; 
+
+    document.addEventListener('keydown', (event) => {
+        const speed = 2; 
+
+        if (event.key === 'ArrowUp') {
+            pitch -= speed;
+        } else if (event.key === 'ArrowDown') {
+            pitch += speed;
+        } else if (event.key === 'ArrowLeft') {
+            yaw -= speed; 
+        } else if (event.key === 'ArrowRight') {
+            yaw += speed; 
         }
-        if (entity.hasAttribute('dynamic-body')) {
-            entity.removeAttribute('dynamic-body');
-            console.log('Removed dynamic-body from:', entity);
-        }
+        cameraRig.setAttribute('rotation', { x: pitch, y: yaw, z: 0 });
     });
 }
