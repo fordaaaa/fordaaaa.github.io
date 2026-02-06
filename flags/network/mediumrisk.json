@@ -1,0 +1,56 @@
+{
+  "strings": [
+    "SERVER_ADDRESS",
+    "HOST_ADDRESS",
+    "CONNECTION_STRING",
+    "REMOTE_HOST",
+    "REMOTE_PORT",
+    "NETWORK_CONFIG",
+    "SOCKET_CONNECT",
+    "HTTP_REQUEST",
+    "POST_DATA",
+    "GET_REQUEST",
+    "UPLOAD_FILE",
+    "DOWNLOAD_FILE",
+    "SEND_DATA",
+    "RECEIVE_DATA",
+    "NETWORK_COMMUNICATION",
+    "SOCKET_LISTENER",
+    "PORT_LISTENER",
+    "CONNECTION_POOL",
+    "RETRY_CONNECTION",
+    "RECONNECT",
+    "AUTO_RECONNECT",
+    "KEEP_ALIVE",
+    "TIMEOUT",
+    "CONNECTION_TIMEOUT"
+  ],
+  "urls": [
+    "http://.*/api/.*",
+    "http://.*/v1/.*",
+    "http://.*/v2/.*",
+    "http://.*/endpoint",
+    "http://.*/service",
+    "http://.*/client",
+    "http://.*/server",
+    "https://.*/api/.*"
+  ],
+  "protocols": [
+    "TCP_CONNECT",
+    "UDP_SEND",
+    "HTTP_CLIENT",
+    "HTTPS_CLIENT",
+    "WEBSOCKET",
+    "FTP_CLIENT",
+    "SMTP_CLIENT"
+  ],
+  "suspicious_patterns": [
+    "base64.*decode.*url",
+    "encrypt.*url",
+    "obfuscate.*domain",
+    "decode.*ip",
+    "hardcoded.*ip",
+    "hardcoded.*port",
+    "embedded.*url"
+  ]
+}
