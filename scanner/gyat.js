@@ -37,31 +37,31 @@ function setupFileUpload() {
         fileInput.click();
     });
 
-    // drag and drop (dont know if this actually works)
-    // uploadArea.addEventListener('dragover', (e) => {
-    //     e.preventDefault();
-    //     uploadArea.classList.add('border-gray-400');
-    // });
+    // drag and drop
+    uploadArea.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        uploadArea.classList.add('border-gray-400');
+    });
 
-    // uploadArea.addEventListener('dragleave', () => {
-    //     uploadArea.classList.remove('border-gray-400');
-    // });
+    uploadArea.addEventListener('dragleave', () => {
+        uploadArea.classList.remove('border-gray-400');
+    });
 
-    // uploadArea.addEventListener('drop', (e) => {
-    //     e.preventDefault();
-    //     uploadArea.classList.remove('border-gray-400');
-    //     const files = e.dataTransfer.files;
-    //     if (files.length > 0) {
-    //         handleFileSelect(files[0]);
-    //     }
-    // });
+    uploadArea.addEventListener('drop', (e) => {
+        e.preventDefault();
+        uploadArea.classList.remove('border-gray-400');
+        const files = e.dataTransfer.files;
+        if (files.length > 0) {
+            handleFileSelect(files[0]);
+        }
+    });
 
-    // file input change - might work better than drag and drop
-    // fileInput.addEventListener('change', (e) => {
-    //     if (e.target.files.length > 0) {
-    //         handleFileSelect(e.target.files[0]);
-    //     }
-    // });
+    // file input change
+    fileInput.addEventListener('change', (e) => {
+        if (e.target.files.length > 0) {
+            handleFileSelect(e.target.files[0]);
+        }
+    });
 
     // scan button
     scanBtn.addEventListener('click', () => {
