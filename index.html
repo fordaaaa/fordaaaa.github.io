@@ -3,46 +3,206 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>File Upload</title>
+    <title>RAT Scanner</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Roboto+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <style>
-        body {
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
+        @tailwind base;
+        @tailwind components;
+        @tailwind utilities;
+
+        @layer base {
+            :root {
+                --hard-shadow: 0px 29px 52px 0px rgba(0, 0, 0, 0.4), 22px 25px 16px 0px rgba(0, 0, 0, 0.2);
+                --hard-shadow-left: 0px 29px 52px 0px rgba(0, 0, 0, 0.4), -22px 25px 16px 0px rgba(0, 0, 0, 0.2);
+                
+                --background: 0 0% 100%;
+                --foreground: 240 10% 3.9%;
+                --card: 0 0% 100%;
+                --card-foreground: 240 10% 3.9%;
+                --popover: 0 0% 100%;
+                --popover-foreground: 240 10% 3.9%;
+                --primary: 240 5.9% 10%;
+                --primary-foreground: 355.7 100% 97.3%;
+                --secondary: 240 4.8% 95.9%;
+                --secondary-foreground: 240 5.9% 10%;
+                --muted: 240 4.8% 95.9%;
+                --muted-foreground: 240 3.8% 46.1%;
+                --accent: 240 4.8% 95.9%;
+                --accent-foreground: 240 5.9% 10%;
+                --destructive: 0 84.2% 60.2%;
+                --destructive-foreground: 0 0% 98%;
+                --border: 240 5.9% 90%;
+                --input: 240 5.9% 90%;
+                --radius: 0.5rem;
+            }
+
+            .dark {
+                --background: 20 14.3% 4.1%;
+                --foreground: 0 0% 95%;
+                --card: 24 9.8% 10%;
+                --card-foreground: 0 0% 95%;
+                --popover: 0 0% 9%;
+                --popover-foreground: 0 0% 95%;
+                --primary: 0 0% 98%;
+                --primary-foreground: 144.9 80.4% 10%;
+                --secondary: 240 3.7% 15.9%;
+                --secondary-foreground: 0 0% 98%;
+                --muted: 0 0% 15%;
+                --muted-foreground: 240 5% 64.9%;
+                --accent: 12 6.5% 15.1%;
+                --accent-foreground: 0 0% 98%;
+                --destructive: 0 62.8% 30.6%;
+                --destructive-foreground: 0 85.7% 97.3%;
+                --border: 240 3.7% 15.9%;
+                --input: 240 3.7% 15.9%;
+            }
+
+            body {
+                font-family: 'JetBrains Mono', 'Roboto Mono', monospace;
+                background: hsl(var(--background));
+                color: hsl(var(--foreground));
+            }
+
+            *,
+            ::before,
+            ::after {
+                border-color: hsl(var(--border));
+            }
+
+            h1, h2, h3, h4, h5, h6 {
+                font-weight: 600;
+            }
+        }
+
+        @layer utilities {
+            .text-balance {
+                text-wrap: balance;
+            }
+
+            .hard-shadow {
+                box-shadow: var(--hard-shadow);
+            }
+
+            .hard-shadow-left {
+                box-shadow: var(--hard-shadow-left);
+            }
+
+            .container-narrow {
+                max-width: 56rem;
+            }
+
+            .container-wide {
+                max-width: 72rem;
+            }
+
+            .container-ultrawide {
+                max-width: 80rem;
+            }
+        }
+
+        .card {
+            background: hsl(var(--card));
+            color: hsl(var(--card-foreground));
+            border-radius: calc(var(--radius) + 4px);
+            border: 1px solid hsl(var(--border));
+        }
+
+        .btn {
+            display: inline-flex;
             align-items: center;
-            min-height: 100vh;
-            font-family: 'JetBrains Mono', 'Roboto Mono', monospace;
+            justify-content: center;
+            border-radius: calc(var(--radius) - 2px);
+            font-weight: 600;
+            transition: all 0.2s;
+            padding: 0.625rem 1.25rem;
         }
-        h1 {
-            font-size: 48px;
+
+        .btn-primary {
+            background: hsl(var(--primary));
+            color: hsl(var(--primary-foreground));
         }
-        .upload-icon {
-            max-width: 300px;
-            height: auto;
+
+        .btn-primary:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
         }
     </style>
 </head>
-<body>
-    <img src="assets/uploadicon.png" alt="Upload Icon" class="upload-icon">
+<body class="min-h-screen">
+    <div class="flex min-h-screen flex-col items-center justify-center p-4 bg-gradient-to-br from-gray-50 via-white to-gray-100 dark:from-gray-950 dark:via-gray-900 dark:to-gray-800">
+        <div class="container-narrow w-full">
+            <div class="card hard-shadow p-8 md:p-12">
+                <div class="flex flex-col items-center space-y-8">
+                    <!-- icon -->
+                    <div class="relative">
+                        <img src="assets/uploadicon.png" alt="Upload Icon" class="w-32 h-32 md:w-40 md:h-40 object-contain">
+                    </div>
+                    
+                    <!-- header -->
+                    <div class="text-center space-y-3">
+                        <h1 class="text-4xl md:text-5xl font-bold tracking-tight">RAT Scanner</h1>
+                        <p class="text-lg text-muted-foreground max-w-md text-balance">
+                            Upload a file to scan for malicious network indicators and suspicious patterns
+                        </p>
+                    </div>
 
-    <!-- Library Scripts -->
-    <!-- Chart.js -->
+                    <!-- upload area -->
+                    <div class="w-full max-w-lg">
+                        <div 
+                            id="uploadArea" 
+                            class="border-2 border-dashed rounded-xl p-12 text-center cursor-pointer transition-all duration-200 bg-muted/30 hover:bg-muted/50 hover:border-primary/50"
+                            style="border-color: hsl(var(--border));"
+                        >
+                            <input type="file" id="fileInput" class="hidden" accept=".jar,.zip,.exe,.dll,.apk">
+                            <div class="space-y-2">
+                                <p class="text-base font-medium">Click to upload or drag and drop</p>
+                                <p class="text-sm text-muted-foreground">JAR, ZIP, or other archive files</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- file info -->
+                    <div id="fileInfo" class="hidden w-full max-w-lg">
+                        <div class="card p-4 bg-muted/50">
+                            <p class="text-sm font-semibold" id="fileName"></p>
+                            <p class="text-xs text-muted-foreground mt-1" id="fileSize"></p>
+                        </div>
+                    </div>
+
+                    <!-- scan button -->
+                    <button 
+                        id="scanBtn" 
+                        class="btn btn-primary hidden min-w-[200px]"
+                    >
+                        Scan File
+                    </button>
+
+                    <!-- results -->
+                    <div id="results" class="hidden w-full mt-8 space-y-6"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- chart -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     
-    <!-- Highlight.js -->
+    <!-- highlight -->
     <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/highlight.min.js"></script>
     
-    <!-- JSZip -->
+    <!-- jszip -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
     
-    <!-- Pako (compression library) -->
+    <!-- pako -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pako/2.1.0/pako.min.js"></script>
     
-    <!-- DOMPurify -->
+    <!-- purify -->
     <script src="https://cdn.jsdelivr.net/npm/dompurify@3.0.6/dist/purify.min.js"></script>
+
+    <!-- scanner script -->
+    <script src="scanner/gyat.js"></script>
 </body>
 </html>
